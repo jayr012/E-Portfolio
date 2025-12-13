@@ -5,22 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jay-r W. Hernane | E-Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    
-    <link href="styles.css" rel="stylesheet">
-
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#4f46e5', // Indigo 600
+                        'secondary': '#14b8a6', // Teal 500
+                        'background-dark': '#1e293b', // Slate 800
+                        'text-light': '#f8fafc', // Slate 50
+                    }
+                }
+            }
+        }
+    </script>
     <style>
         /* Apply Poppins to the entire body */
         body {
             font-family: 'Poppins', sans-serif;
         }
         /* --- MODIFICATION START --- */
-        /* All sections are now scrollable, removing the single-section display logic */
+        /* Remove single-section display logic for scrollable page */
+        /* The content-section class is kept but the display/opacity rules are removed/modified */
         .content-section {
-            padding-top: 40px; 
+            /* Now all sections are visible and transition is irrelevant */
+            padding-top: 40px; /* Add some space between sections for readability */
         }
         .content-section:first-of-type {
             padding-top: 0;
         }
+
         /* --- MODIFICATION END --- */
 
         /* Custom styles for smooth scrolling and hover effects */
@@ -69,6 +84,7 @@
             border-radius: 0.75rem;
             overflow: hidden;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+            /* Removed cursor: pointer to prevent opening modal on card area click */
             transition: transform 0.2s, box-shadow 0.2s;
         }
         .certificate-card:hover {
@@ -598,13 +614,15 @@
 
         // Get all navigation links and content sections
         const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+        const contentSections = document.querySelectorAll('.content-section');
         const sections = document.querySelectorAll('section');
 
         // Modal elements
         const modal = document.getElementById('certificate-modal');
         const modalContent = document.getElementById('modal-content');
         const modalClose = document.getElementById('modal-close');
-        const viewCertBtns = document.querySelectorAll('.view-cert-btn');
+        const certCards = document.querySelectorAll('.certificate-card');
+        const viewCertBtns = document.querySelectorAll('.view-cert-btn'); // New selector for view buttons
 
 
         /**
@@ -626,12 +644,13 @@
         function highlightActiveSection() {
             let currentActive = 'home'; // Default to home
 
-            // Offset to account for fixed header/margin when determining which section is in view
-            const offset = 100; 
+            // Use a slight offset to determine which section is "active"
+            // The value 100 accounts for padding/margins and the fixed top nav on desktop
+            const offset = 100;
 
             sections.forEach(section => {
                 const rect = section.getBoundingClientRect();
-                // Check if the section's top is visible (or slightly above) and the bottom is not yet visible
+                // If the section's top is visible (or slightly above) and the bottom is not yet visible
                 if (rect.top <= offset && rect.bottom > offset) {
                     currentActive = section.id;
                 }
@@ -686,7 +705,7 @@
         }
 
 
-        // --- Modal/Lightbox Logic ---
+        // --- Modal/Lightbox Logic (MODIFIED to only open on 'View' button click) ---
 
         // Function to open the modal
         function openModal(certUrl) {
@@ -697,8 +716,10 @@
         // Event listener for VIEW buttons to open the modal
         viewCertBtns.forEach(button => {
             button.addEventListener('click', (e) => {
+                // Stop event from propagating up to potentially interfere with other listeners
                 e.stopPropagation(); 
                 
+                // Find the closest certificate-card parent to get the URL
                 const card = e.target.closest('.certificate-card');
                 if (card) {
                     const certUrl = card.getAttribute('data-certificate-url');
