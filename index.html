@@ -25,20 +25,16 @@
         body {
             font-family: 'Poppins', sans-serif;
         }
-        /* --- MODIFICATION START --- */
-        /* Remove single-section display logic for scrollable page */
-        /* The content-section class is kept but the display/opacity rules are removed/modified */
-        .content-section {
-            /* Now all sections are visible and transition is irrelevant */
-            padding-top: 40px; /* Add some space between sections for readability */
-        }
-        .content-section:first-of-type {
-            padding-top: 0;
-        }
-
-        /* --- MODIFICATION END --- */
-
         /* Custom styles for smooth scrolling and hover effects */
+        .content-section {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .content-section.active {
+            display: block;
+            opacity: 1;
+        }
         .nav-link.active {
             background-color: #374151; /* Darker slate for active link background */
             border-left: 4px solid #14b8a6; /* Teal border highlight */
@@ -84,7 +80,7 @@
             border-radius: 0.75rem;
             overflow: hidden;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
-            /* Removed cursor: pointer to prevent opening modal on card area click */
+            cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
         }
         .certificate-card:hover {
@@ -151,38 +147,38 @@
         
         <nav id="sidebar" class="hidden lg:block lg:w-72 bg-gray-800 text-text-light p-6 shadow-2xl sticky top-0 h-screen overflow-y-auto">
             <div class="mb-10 pt-4">
-                <h2 class="text-4xl font-extrabold text-secondary tracking-wider">Jay-r Hernane</h2>
-
+                <h2 class="text-4xl font-extrabold text-secondary tracking-wider">E-Portfolio</h2>
+                <p class="text-sm text-gray-400 mt-1">Jay-r W. Hernane</p>
             </div>
             
             <ul class="space-y-2">
                 <li>
-                    <a href="#home" class="nav-link flex items-center p-3 rounded-lg text-lg hover:bg-gray-700 transition duration-150 active">
+                    <a href="#home" class="nav-link flex items-center p-3 rounded-lg text-lg hover:bg-gray-700 transition duration-150 active" data-target="home">
                         <i data-lucide="home" class="w-5 h-5 mr-3"></i> Home
                     </a>
                 </li>
                 <li>
-                    <a href="#about" class="nav-link flex items-center p-3 rounded-lg text-lg hover:bg-gray-700 transition duration-150">
+                    <a href="#about" class="nav-link flex items-center p-3 rounded-lg text-lg hover:bg-gray-700 transition duration-150" data-target="about">
                         <i data-lucide="user" class="w-5 h-5 mr-3"></i> About
                     </a>
                 </li>
                 <li>
-                    <a href="#education" class="nav-link flex items-center p-3 rounded-lg text-lg hover:bg-gray-700 transition duration-150">
+                    <a href="#education" class="nav-link flex items-center p-3 rounded-lg text-lg hover:bg-gray-700 transition duration-150" data-target="education">
                         <i data-lucide="graduation-cap" class="w-5 h-5 mr-3"></i> Education
                     </a>
                 </li>
                 <li>
-                    <a href="#certificates" class="nav-link flex items-center p-3 rounded-lg text-lg hover:bg-gray-700 transition duration-150">
+                    <a href="#certificates" class="nav-link flex items-center p-3 rounded-lg text-lg hover:bg-gray-700 transition duration-150" data-target="certificates">
                         <i data-lucide="award" class="w-5 h-5 mr-3"></i> Certificates
                     </a>
                 </li>
                 <li>
-                    <a href="#projects" class="nav-link flex items-center p-3 rounded-lg text-lg hover:bg-gray-700 transition duration-150">
+                    <a href="#projects" class="nav-link flex items-center p-3 rounded-lg text-lg hover:bg-gray-700 transition duration-150" data-target="projects">
                         <i data-lucide="code" class="w-5 h-5 mr-3"></i> Projects
                     </a>
                 </li>
                 <li>
-                    <a href="#contacts" class="nav-link flex items-center p-3 rounded-lg text-lg hover:bg-gray-700 transition duration-150">
+                    <a href="#contacts" class="nav-link flex items-center p-3 rounded-lg text-lg hover:bg-gray-700 transition duration-150" data-target="contacts">
                         <i data-lucide="mail" class="w-5 h-5 mr-3"></i> Contacts
                     </a>
                 </li>
@@ -207,32 +203,32 @@
         <nav id="mobile-nav" class="lg:hidden fixed bottom-0 left-0 right-0 bg-gray-800 text-text-light shadow-2xl z-20">
             <ul class="flex justify-around items-center h-16 text-sm">
                 <li>
-                    <a href="#home" class="mobile-nav-link flex flex-col items-center p-1 text-gray-400 active">
+                    <a href="#home" class="mobile-nav-link flex flex-col items-center p-1 text-gray-400 active" data-target="home">
                         <i data-lucide="home" class="w-5 h-5"></i> Home
                     </a>
                 </li>
                 <li>
-                    <a href="#about" class="mobile-nav-link flex flex-col items-center p-1 text-gray-400">
+                    <a href="#about" class="mobile-nav-link flex flex-col items-center p-1 text-gray-400" data-target="about">
                         <i data-lucide="user" class="w-5 h-5"></i> About
                     </a>
                 </li>
                 <li>
-                    <a href="#education" class="mobile-nav-link flex flex-col items-center p-1 text-gray-400">
+                    <a href="#education" class="mobile-nav-link flex flex-col items-center p-1 text-gray-400" data-target="education">
                         <i data-lucide="graduation-cap" class="w-5 h-5"></i> Educ
                     </a>
                 </li>
                 <li>
-                    <a href="#certificates" class="mobile-nav-link flex flex-col items-center p-1 text-gray-400">
+                    <a href="#certificates" class="mobile-nav-link flex flex-col items-center p-1 text-gray-400" data-target="certificates">
                         <i data-lucide="award" class="w-5 h-5"></i> Certs
                     </a>
                 </li>
                 <li>
-                    <a href="#projects" class="mobile-nav-link flex flex-col items-center p-1 text-gray-400">
+                    <a href="#projects" class="mobile-nav-link flex flex-col items-center p-1 text-gray-400" data-target="projects">
                         <i data-lucide="code" class="w-5 h-5"></i> Projs
                     </a>
                 </li>
                 <li>
-                    <a href="#contacts" class="mobile-nav-link flex flex-col items-center p-1 text-gray-400">
+                    <a href="#contacts" class="mobile-nav-link flex flex-col items-center p-1 text-gray-400" data-target="contacts">
                         <i data-lucide="mail" class="w-5 h-5"></i> Contact
                     </a>
                 </li>
@@ -245,7 +241,7 @@
                 <h1 class="text-4xl font-extrabold text-primary border-b pb-2">E-Portfolio</h1>
             </header>
 
-            <section id="home" class="content-section">
+            <section id="home" class="content-section active">
                 
                 <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-xl mb-8 flex flex-col md:flex-row items-center text-center md:text-left">
                     <img src="https://placehold.co/150x150/4f46e5/ffffff?text=JR" alt="Profile Picture Placeholder" class="rounded-full w-40 h-40 object-cover mb-6 md:mb-0 md:mr-8 border-4 border-secondary shadow-lg">
@@ -358,16 +354,9 @@
                         <div class="p-4">
                             <h3 class="text-xl font-bold text-primary mb-1">Introduction to HTML</h3>
                             <p class="text-sm text-gray-600 dark:text-gray-300">Simplilearn</p>
-                            <div class="mt-3 flex justify-between items-center">
-                                <button class="view-cert-btn inline-flex items-center text-secondary hover:text-primary font-medium text-sm">
-                                    View <i data-lucide="maximize" class="w-4 h-4 ml-1"></i>
-                                </button>
-                                <a href="https://i.supaimg.com/b4631a11-caac-4516-80a8-7d2c40583cb5.jpg" 
-                                   download="Jayr_W_Hernane_Introduction_to_HTML_Simplilearn.jpg"
-                                   class="inline-flex items-center text-primary hover:text-secondary font-medium text-sm">
-                                    <i data-lucide="download" class="w-4 h-4 mr-1"></i> Download
-                                </a>
-                            </div>
+                            <button class="view-cert-btn mt-3 inline-flex items-center text-secondary hover:text-primary font-medium text-sm">
+                                View Certificate <i data-lucide="maximize" class="w-4 h-4 ml-1"></i>
+                            </button>
                         </div>
                     </div>
 
@@ -379,16 +368,9 @@
                         <div class="p-4">
                             <h3 class="text-xl font-bold text-primary mb-1">Introduction to CSS</h3>
                             <p class="text-sm text-gray-600 dark:text-gray-300">Simplilearn</p>
-                            <div class="mt-3 flex justify-between items-center">
-                                <button class="view-cert-btn inline-flex items-center text-secondary hover:text-primary font-medium text-sm">
-                                    View <i data-lucide="maximize" class="w-4 h-4 ml-1"></i>
-                                </button>
-                                <a href="https://i.supaimg.com/412281ed-4511-467f-ac8f-725a60da1963.jpg" 
-                                   download="Jayr_W_Hernane_Introduction_to_CSS_Simplilearn.jpg"
-                                   class="inline-flex items-center text-primary hover:text-secondary font-medium text-sm">
-                                    <i data-lucide="download" class="w-4 h-4 mr-1"></i> Download
-                                </a>
-                            </div>
+                            <button class="view-cert-btn mt-3 inline-flex items-center text-secondary hover:text-primary font-medium text-sm">
+                                View Certificate <i data-lucide="maximize" class="w-4 h-4 ml-1"></i>
+                            </button>
                         </div>
                     </div>
                     
@@ -400,16 +382,9 @@
                         <div class="p-4">
                             <h3 class="text-xl font-bold text-primary mb-1">JavaScript Essentials</h3>
                             <p class="text-sm text-gray-600 dark:text-gray-300">Simplilearn</p>
-                            <div class="mt-3 flex justify-between items-center">
-                                <button class="view-cert-btn inline-flex items-center text-secondary hover:text-primary font-medium text-sm">
-                                    View <i data-lucide="maximize" class="w-4 h-4 ml-1"></i>
-                                </button>
-                                <a href="https://i.supaimg.com/c2d91336-7419-4f3f-8922-32b766e0c4ec.jpg" 
-                                   download="Jayr_W_Hernane_JavaScript_Essentials_Simplilearn.jpg"
-                                   class="inline-flex items-center text-primary hover:text-secondary font-medium text-sm">
-                                    <i data-lucide="download" class="w-4 h-4 mr-1"></i> Download
-                                </a>
-                            </div>
+                            <button class="view-cert-btn mt-3 inline-flex items-center text-secondary hover:text-primary font-medium text-sm">
+                                View Certificate <i data-lucide="maximize" class="w-4 h-4 ml-1"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -571,14 +546,6 @@
                     </p>
                     <div class="space-y-3">
                         <p class="text-gray-600 dark:text-gray-300 text-lg flex items-center">
-                            <i data-lucide="smartphone" class="w-5 h-5 mr-3 text-primary"></i> 
-                            <span class="font-semibold mr-2">Mobile 1:</span> 09285355323
-                        </p>
-                        <p class="text-gray-600 dark:text-gray-300 text-lg flex items-center">
-                            <i data-lucide="smartphone" class="w-5 h-5 mr-3 text-primary"></i> 
-                            <span class="font-semibold mr-2">Mobile 2:</span> 09922858971
-                        </p>
-                        <p class="text-gray-600 dark:text-gray-300 text-lg flex items-center">
                             <i data-lucide="mail" class="w-5 h-5 mr-3 text-primary"></i> 
                             <span class="font-semibold mr-2">Email 1:</span> 
                             <a href="mailto:jayrhernane111@gmail.com" class="hover:text-secondary transition duration-150">jayrhernane111@gmail.com</a>
@@ -588,8 +555,16 @@
                             <span class="font-semibold mr-2">Email 2:</span> 
                             <a href="mailto:jayrhernane012@gmail.com" class="hover:text-secondary transition duration-150">jayrhernane012@gmail.com</a>
                         </p>
+                        <p class="text-gray-600 dark:text-gray-300 text-lg flex items-center">
+                            <i data-lucide="smartphone" class="w-5 h-5 mr-3 text-primary"></i> 
+                            <span class="font-semibold mr-2">Mobile 1:</span> 09285355323
+                        </p>
+                        <p class="text-gray-600 dark:text-gray-300 text-lg flex items-center">
+                            <i data-lucide="smartphone" class="w-5 h-5 mr-3 text-primary"></i> 
+                            <span class="font-semibold mr-2">Mobile 2:</span> 09922858971
+                        </p>
                         <p class="text-sm text-gray-500 pt-4 italic">
-                            Feel free to reach out via text or call for inquiries regarding my portfolio or collaborations.
+                            Feel free to reach out via email, text, or call for inquiries regarding my portfolio or collaborations.
                         </p>
                     </div>
                 </div>
@@ -615,59 +590,44 @@
         // Get all navigation links and content sections
         const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
         const contentSections = document.querySelectorAll('.content-section');
-        const sections = document.querySelectorAll('section');
 
         // Modal elements
         const modal = document.getElementById('certificate-modal');
         const modalContent = document.getElementById('modal-content');
         const modalClose = document.getElementById('modal-close');
         const certCards = document.querySelectorAll('.certificate-card');
-        const viewCertBtns = document.querySelectorAll('.view-cert-btn'); // New selector for view buttons
 
 
         /**
-         * Smoothly scrolls to the target section and updates navigation highlights.
-         * @param {string} targetId The ID of the section to scroll to (e.g., 'home', 'about').
+         * Toggles the active content section and updates navigation highlights.
+         * @param {string} targetId The ID of the section to show (e.g., 'home', 'about').
          */
-        function scrollToSection(targetId) {
-            const targetSection = document.getElementById(targetId);
-            if (targetSection) {
-                targetSection.scrollIntoView({ behavior: 'smooth' });
-                // Manually update the hash after scrolling to keep the URL correct
-                history.pushState(null, '', '#' + targetId);
-            }
-        }
-        
-        /**
-         * Updates the navigation links based on the section currently in view.
-         */
-        function highlightActiveSection() {
-            let currentActive = 'home'; // Default to home
-
-            // Use a slight offset to determine which section is "active"
-            // The value 100 accounts for padding/margins and the fixed top nav on desktop
-            const offset = 100;
-
-            sections.forEach(section => {
-                const rect = section.getBoundingClientRect();
-                // If the section's top is visible (or slightly above) and the bottom is not yet visible
-                if (rect.top <= offset && rect.bottom > offset) {
-                    currentActive = section.id;
-                }
+        function setActiveSection(targetId) {
+            // 1. Deactivate all sections and links
+            contentSections.forEach(section => {
+                section.classList.remove('active');
             });
-
-            // Update all navigation links
             navLinks.forEach(link => {
-                const targetId = link.getAttribute('href').replace('#', '');
-                
                 link.classList.remove('active');
+                // Ensure mobile links revert to default color
                 if (link.classList.contains('mobile-nav-link')) {
                     link.classList.remove('text-secondary');
                     link.classList.add('text-gray-400');
                 }
+            });
 
-                if (targetId === currentActive) {
+            // 2. Activate the target section
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+                window.scrollTo(0, 0); // Scroll to top for a clean transition
+            }
+
+            // 3. Highlight the active link(s)
+            navLinks.forEach(link => {
+                if (link.getAttribute('data-target') === targetId) {
                     link.classList.add('active');
+                    // Add mobile active styling
                     if (link.classList.contains('mobile-nav-link')) {
                         link.classList.add('text-secondary');
                         link.classList.remove('text-gray-400');
@@ -676,36 +636,28 @@
             });
         }
 
-        // Add event listeners for link clicks to scroll instead of hide/show
+        // Initialize the page based on URL hash or default to 'home'
+        function initializePage() {
+            const hash = window.location.hash.replace('#', '');
+            // Check if the hash points to a valid section, otherwise default to 'home'
+            const defaultSection = (hash && document.getElementById(hash)) ? hash : 'home';
+            setActiveSection(defaultSection);
+        }
+
+        // Add event listeners to all navigation links
         navLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
-                const targetId = link.getAttribute('href').replace('#', '');
-                scrollToSection(targetId);
+                const targetId = link.getAttribute('data-target');
+                if (targetId) {
+                    // Update the URL hash without reloading the page
+                    history.pushState(null, '', '#' + targetId);
+                    setActiveSection(targetId);
+                }
             });
         });
 
-        // Event listener for scroll to highlight the current section
-        window.addEventListener('scroll', highlightActiveSection);
-
-        // Initial highlighting on page load based on the URL hash or default
-        function initializePage() {
-            const hash = window.location.hash.replace('#', '');
-            const defaultSection = (hash && document.getElementById(hash)) ? hash : 'home';
-            // Scroll to the initial section if there is a hash
-            if (hash) {
-                // Use setTimeout to allow the browser to render the layout first
-                setTimeout(() => {
-                    document.getElementById(defaultSection).scrollIntoView();
-                    highlightActiveSection(); // Manually set active for initial load before scroll
-                }, 0);
-            } else {
-                highlightActiveSection(); // Set active for 'home' by default
-            }
-        }
-
-
-        // --- Modal/Lightbox Logic (MODIFIED to only open on 'View' button click) ---
+        // --- Modal/Lightbox Logic ---
 
         // Function to open the modal
         function openModal(certUrl) {
@@ -713,23 +665,16 @@
             modal.style.display = 'flex';
         }
 
-        // Event listener for VIEW buttons to open the modal
-        viewCertBtns.forEach(button => {
-            button.addEventListener('click', (e) => {
-                // Stop event from propagating up to potentially interfere with other listeners
-                e.stopPropagation(); 
-                
-                // Find the closest certificate-card parent to get the URL
-                const card = e.target.closest('.certificate-card');
-                if (card) {
-                    const certUrl = card.getAttribute('data-certificate-url');
-                    if (certUrl) {
-                        openModal(certUrl);
-                    }
+        // Event listener for certificate cards (clicking anywhere on the card)
+        certCards.forEach(card => {
+            card.addEventListener('click', (e) => {
+                // Ensure click is handled once, checking data attribute
+                const certUrl = card.getAttribute('data-certificate-url');
+                if (certUrl) {
+                    openModal(certUrl);
                 }
             });
         });
-
 
         // Event listener to close the modal
         modalClose.addEventListener('click', () => {
@@ -742,6 +687,9 @@
                 modal.style.display = 'none';
             }
         });
+
+        // Listen for back/forward navigation using the browser's history
+        window.addEventListener('popstate', initializePage);
 
         // Run initialization on load
         document.addEventListener('DOMContentLoaded', initializePage);
